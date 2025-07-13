@@ -14,7 +14,7 @@ class Colour(Enum):
 
 class Car(BaseModel):
     model: str = Field(min_length=2)
-    make: Optional[int]
+    make: Optional[int] = Field(gt=2005)
     color: Colour
     isSedan: bool = None
     engine: Engine
