@@ -1,6 +1,5 @@
-from collections import Counter
-
-from pydantic import BaseModel
+from typing import Optional
+from pydantic import BaseModel, Field
 from enum import Enum
 
 
@@ -14,8 +13,8 @@ class Colour(Enum):
     GREEN =  "green"
 
 class Car(BaseModel):
-    model: str
-    make: int
+    model: str = Field(min_length=2)
+    make: Optional[int]
     color: Colour
     isSedan: bool = None
     engine: Engine
@@ -26,3 +25,7 @@ BMW = Car(model="x3", make=2007, color=Colour.RED, isSedan=False, engine=engine_
 print(BMW)
 
 print(f"Color of the BMW is {BMW.color.value}")
+print(f"Engine age is {BMW.engine.age}, stroke length is {BMW.engine.stroke}")
+
+ford_obj = Car(model="Ford",color=Colour.GREEN, engine=engine_bmw)
+print(ford_obj)
